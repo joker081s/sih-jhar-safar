@@ -7,7 +7,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 
 export default function CarouselHome() {
