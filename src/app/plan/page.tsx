@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Brain, ArrowLeft, MapPin, Calendar, Users } from "lucide-react";
+import { Brain, ArrowLeft, MapPin, Calendar } from "lucide-react";
 
 export default function PlanPage() {
   return (
@@ -60,7 +60,7 @@ export default function PlanPage() {
               Jhar-AI Coming Soon
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              We're developing an advanced AI travel assistant that will revolutionize 
+              We&apos;re developing an advanced AI travel assistant that will revolutionize 
               how you plan your Jharkhand trip. Get ready for personalized recommendations, 
               smart routing, and real-time updates!
             </p>

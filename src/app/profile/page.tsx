@@ -27,7 +27,7 @@ export default function ProfilePage() {
   const storeUser = useAppStore((s) => s.user);
   const setUserStore = useAppStore((s) => s.setUser);
   const role = useAppStore((s) => s.role);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ name?: string; email?: string; phone?: string; location?: string; joinDate?: string } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -46,7 +46,7 @@ export default function ProfilePage() {
         name: storeUser.name || '',
         email: storeUser.email || '',
         phone: storeUser.phone || '',
-        location: (storeUser as any).location || 'Jharkhand, India',
+        location: (storeUser as unknown as { location?: string }).location || 'Jharkhand, India',
         joinDate: new Date().toISOString().split('T')[0]
       });
     } else {

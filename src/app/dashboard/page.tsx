@@ -87,21 +87,21 @@ interface Provider {
   distance: number;
 }
 
-interface Booking {
-  id: string;
-  providerId: string;
-  providerName: string;
-  service: string;
-  type: 'cab' | 'hotel' | 'restaurant' | 'shop' | 'guide';
-  date: string;
-  time: string;
-  duration?: string;
-  location: string;
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
-  amount: number;
-  rating?: number;
-  feedback?: string;
-}
+// interface Booking {
+//   id: string;
+//   providerId: string;
+//   providerName: string;
+//   service: string;
+//   type: 'cab' | 'hotel' | 'restaurant' | 'shop' | 'guide';
+//   date: string;
+//   time: string;
+//   duration?: string;
+//   location: string;
+//   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+//   amount: number;
+//   rating?: number;
+//   feedback?: string;
+// }
 
 interface NearbyProvider {
   id: string;
@@ -157,8 +157,12 @@ export default function DashboardPage() {
   const [nearbyProviders, setNearbyProviders] = useState<NearbyProvider[]>([]);
   const [selectedServiceType, setSelectedServiceType] = useState<string>('all');
 
+  console.log(wishlist);
+  console.log(visited);
+  console.log(providers);
   // Guard: only logged-in users with role 'user'
   useEffect(() => {
+    
     if (!user || role !== 'user') {
       router.replace('/login');
     }
@@ -310,27 +314,27 @@ export default function DashboardPage() {
         phone: '+91 9876543215'
       }
     ]);
-  }, []);
+  }, [complaintsGlobal]);
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'city': return '🏙️';
-      case 'temple': return '🏛️';
-      case 'heritage': return '🏛️';
-      case 'wildlife': return '🌿';
-      default: return '📍';
-    }
-  };
+  // const getTypeIcon = (type: string) => {
+  //   switch (type) {
+  //     case 'city': return '🏙️';
+  //     case 'temple': return '🏛️';
+  //     case 'heritage': return '🏛️';
+  //     case 'wildlife': return '🌿';
+  //     default: return '📍';
+  //   }
+  // };
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'city': return 'bg-forest-200 text-forest-600';
-      case 'temple': return 'bg-forest-100 text-forest-500';
-      case 'heritage': return 'bg-forest-200 text-forest-500';
-      case 'wildlife': return 'bg-forest-300 text-forest-600';
-      default: return 'bg-forest-100 text-forest-500';
-    }
-  };
+  // const getTypeColor = (type: string) => {
+  //   switch (type) {
+  //     case 'city': return 'bg-forest-200 text-forest-600';
+  //     case 'temple': return 'bg-forest-100 text-forest-500';
+  //     case 'heritage': return 'bg-forest-200 text-forest-500';
+  //     case 'wildlife': return 'bg-forest-300 text-forest-600';
+  //     default: return 'bg-forest-100 text-forest-500';
+  //   }
+  // };
 
   const getServiceIcon = (type: string) => {
     switch (type) {
@@ -371,18 +375,18 @@ export default function DashboardPage() {
 
   // Feedback flow skipped in current store model
 
-  const getProviderIcon = (type: string) => {
-    switch (type) {
-      case 'cab': return '🚗';
-      case 'hotel': return '🏨';
-      case 'restaurant': return '🍽️';
-      case 'shop': return '🛍️';
-      case 'guide': return '👨‍🏫';
-      default: return '🏢';
-    }
-  };
+  // const getProviderIcon = (type: 'cab' | 'hotel' | 'restaurant' | 'shop' | 'guide') => {
+  //   switch (type) {
+  //     case 'cab': return '🚗';
+  //     case 'hotel': return '🏨';
+  //     case 'restaurant': return '🍽️';
+  //     case 'shop': return '🛍️';
+  //     case 'guide': return '👨‍🏫';
+  //     default: return '🏢';
+  //   }
+  // };
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: 'low' | 'medium' | 'high') => {
     switch (priority) {
       case 'low': return 'bg-green-100 text-green-800';
       case 'medium': return 'bg-yellow-100 text-yellow-800';
@@ -676,7 +680,7 @@ export default function DashboardPage() {
                     <label className="text-sm text-forest-500">Service Type
                     <select
                       value={bookingDraft.type}
-                      onChange={(e) => setBookingDraft((d) => ({ ...d, type: e.target.value as any }))}
+                      onChange={(e) => setBookingDraft((d) => ({ ...d, type: e.target.value as 'hotel' | 'restaurant' | 'guide' | 'cab' }))}
                       className="px-3 py-2 border border-forest-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-300 bg-forest-50 text-forest-500"
                     >
                       <option value="cab">Cab</option>

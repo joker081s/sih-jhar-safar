@@ -5,8 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  TrendingUp, 
-  Users, 
   Star, 
   Clock, 
   DollarSign,
@@ -14,29 +12,20 @@ import {
   Phone,
   MapPin,
   Calendar,
-  BarChart3,
   Settings,
   CheckCircle,
   AlertCircle,
-  Eye,
-  Heart,
+
   Plus,
   Edit,
-  Save,
-  X,
+
   Car,
   Hotel,
   Utensils,
   ShoppingBag,
   UserCheck,
-  ThumbsUp,
-  ThumbsDown,
-  BookOpen,
-  CreditCard,
-  Navigation,
-  Map,
+
   Target,
-  TrendingDown,
   Award,
   Zap
 } from "lucide-react";
@@ -129,7 +118,8 @@ export default function ProviderDashboardPage() {
   const [services, setServices] = useState<Service[]>([]);
   const [improvements, setImprovements] = useState<ImprovementArea[]>([]);
   const [isEditingService, setIsEditingService] = useState<string | null>(null);
-  const [editingPricing, setEditingPricing] = useState<any>(null);
+  // const [editingPricing, setEditingPricing] = useState<Service['pricing'] | null>(null);
+  console.log(isEditingService);
 
   // Mock data - in real app, this would come from API
   useEffect(() => {
@@ -309,9 +299,9 @@ export default function ProviderDashboardPage() {
     }
   };
 
-  const updateRequestStatus = (id: string, status: string) => {
+  const updateRequestStatus = (id: string, status: ServiceRequest['status']) => {
     setRequests(prev => prev.map(req => 
-      req.id === id ? { ...req, status: status as any } : req
+      req.id === id ? { ...req, status } : req
     ));
   };
 
@@ -362,11 +352,11 @@ export default function ProviderDashboardPage() {
     ));
   };
 
-  const updateServicePricing = (id: string, pricing: any) => {
-    setServices(prev => prev.map(service => 
-      service.id === id ? { ...service, pricing } : service
-    ));
-  };
+  // const updateServicePricing = (id: string, pricing: Service['pricing']) => {
+  //   setServices(prev => prev.map(service => 
+  //     service.id === id ? { ...service, pricing } : service
+  //   ));
+  // };
 
   return (
     <div className="min-h-screen bg-forest-50 pt-20">

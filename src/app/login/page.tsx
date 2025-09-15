@@ -10,8 +10,7 @@ import {
   Lock, 
   Eye, 
   EyeOff, 
-  ArrowLeft,
-  Building2,
+
   Car,
   Shield,
   MapPin
@@ -62,7 +61,7 @@ export default function LoginPage() {
       let found = users.find((u) => u.email === formData.email && u.role === roleToMatch);
 
       // Default demo admins (no registration required)
-      const defaultAdmins: Array<{ email: string; password: string; name: string; role: string }> = [
+      const defaultAdmins: Array<{ email: string; password: string; name: string; role: 'admin_state' | 'admin_district' | 'admin_zonal' }> = [
         { email: 'stateadmin@jhar.com', password: 'Admin@123', name: 'State Admin', role: 'admin_state' },
         { email: 'districtadmin@jhar.com', password: 'Admin@123', name: 'District Admin', role: 'admin_district' },
         { email: 'zonaladmin@jhar.com', password: 'Admin@123', name: 'Zonal Admin', role: 'admin_zonal' },
@@ -70,7 +69,7 @@ export default function LoginPage() {
       if (!found && (roleToMatch === 'admin_state' || roleToMatch === 'admin_district' || roleToMatch === 'admin_zonal')) {
         const demo = defaultAdmins.find((a) => a.email === formData.email && a.role === roleToMatch && a.password === formData.password);
         if (demo) {
-          found = { email: demo.email, password: demo.password, name: demo.name, role: demo.role } as any;
+          found = { email: demo.email, password: demo.password, name: demo.name, role: demo.role } as { email: string; password: string; name: string; role: string };
         }
       }
 
@@ -82,7 +81,7 @@ export default function LoginPage() {
 
       // Sync with global store
       loginStore(found.name || 'User');
-      setRole(found.role as any);
+      setRole(found.role as 'admin_state' | 'admin_district' | 'admin_zonal' | 'provider' | 'user' | 'admin');
       setUser({ name: found.name || 'User', email: found.email, phone: found.phone });
       
       // Redirect based on role
@@ -127,7 +126,7 @@ export default function LoginPage() {
       // Save to local registered users list
       const raw = typeof window !== 'undefined' ? localStorage.getItem('registeredUsers') : null;
       const users: Array<{ email: string; password: string; name: string; phone?: string; role: string }> = raw ? JSON.parse(raw) : [];
-      const roleToSave: 'user' = 'user';
+      const roleToSave = 'user' as const;
       if (users.some((u) => u.email === formData.email && u.role === roleToSave)) {
         setIsLoading(false);
         setError('An account with this email and role already exists.');
@@ -138,7 +137,7 @@ export default function LoginPage() {
 
       // Sync with global store and redirect
       loginStore(formData.name || 'User');
-      setRole(roleToSave as any);
+      setRole(roleToSave as "user");
       setUser({ name: formData.name || 'User', email: formData.email, phone: formData.phone });
       
       // Redirect based on role
@@ -175,7 +174,7 @@ export default function LoginPage() {
             <MapPin className="w-8 h-8 text-forest-500 mr-2" />
             <h1 className="text-3xl font-bold text-forest-500">Jhar Safar</h1>
           </div>
-          <p className="text-forest-400">Welcome to Jharkhand's tourism platform</p>
+          <p className="text-forest-400">Welcome to Jharkhand&apos;s tourism platform</p>
         </div>
 
         {/* Login/Register Tabs */}
@@ -298,7 +297,7 @@ export default function LoginPage() {
               <CardHeader>
                 <CardTitle className="text-forest-500 text-center">Create Account</CardTitle>
                 <CardDescription className="text-forest-400 text-center">
-                  Join Jharkhand's tourism community
+                  Join Jharkhand&apos;s tourism community
                 </CardDescription>
               </CardHeader>
               <CardContent>

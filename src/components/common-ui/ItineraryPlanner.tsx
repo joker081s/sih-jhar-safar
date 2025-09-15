@@ -22,10 +22,10 @@ export default function ItineraryPlanner() {
 
   // Build searchable dataset from same sources used in the map
   const dataNames: string[] = [
-    ...JharkhandCities.features.map((f: any) => f.properties?.name).filter(Boolean),
-    ...JharkhandTemples.features.map((f: any) => f.properties?.name).filter(Boolean),
-    ...JharkhandHeritageSites.features.map((f: any) => f.properties?.name).filter(Boolean),
-    ...JharkhandWildlifeAdventure.features.map((f: any) => f.properties?.name).filter(Boolean),
+    ...JharkhandCities.features.map((f) => f.properties?.name).filter(Boolean) as string[],
+    ...JharkhandTemples.features.map((f) => f.properties?.name).filter(Boolean) as string[],
+    ...JharkhandHeritageSites.features.map((f) => f.properties?.name).filter(Boolean) as string[],
+    ...JharkhandWildlifeAdventure.features.map((f) => f.properties?.name).filter(Boolean) as string[],
   ];
   const uniqueNames = Array.from(new Set(dataNames));
   const suggestions = uniqueNames

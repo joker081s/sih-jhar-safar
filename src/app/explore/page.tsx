@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { MapPin, ArrowLeft, Search, Filter, Heart, Star, Clock, Users, Eye, Phone, MessageCircle } from "lucide-react";
+import { MapPin, ArrowLeft, Search, Heart, Star, Clock, Users, Eye, Phone, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { JharkhandTemples } from "@/app/data/JharkhandTemple";
@@ -36,7 +36,7 @@ export default function ExplorePage() {
   const [filteredDestinations, setFilteredDestinations] = useState<Destination[]>([]);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
 
-  const wishlist = useAppStore((s) => s.wishlist);
+  // const wishlist = useAppStore((s) => s.wishlist);
   const toggleWishlistGlobal = useAppStore((s) => s.toggleWishlist);
   const user = useAppStore((s) => s.user);
   const router = useRouter();
@@ -45,7 +45,7 @@ export default function ExplorePage() {
   useEffect(() => {
     const allDestinations: Destination[] = [
       // Cities
-      ...JharkhandCities.features.map((city: any, index) => ({
+      ...JharkhandCities.features.map((city, index) => ({
         id: `city-${index}`,
         name: city.properties?.name,
         description: city.properties?.description,
@@ -56,11 +56,11 @@ export default function ExplorePage() {
         visitors: Math.floor(Math.random() * 10000) + 1000,
         isWishlisted: false,
         isVisited: false,
-        coordinates: city.geometry.coordinates
+        coordinates: city.geometry.coordinates as [number, number]
       })),
       
       // Temples
-      ...JharkhandTemples.features.slice(0, 8).map((temple: any, index) => ({
+      ...JharkhandTemples.features.slice(0, 8).map((temple, index) => ({
         id: `temple-${index}`,
         name: temple.properties?.name,
         description: temple.properties?.description,
@@ -72,11 +72,11 @@ export default function ExplorePage() {
         visitors: Math.floor(Math.random() * 50000) + 5000,
         isWishlisted: false,
         isVisited: false,
-        coordinates: temple.geometry.coordinates
+        coordinates: temple.geometry.coordinates as [number, number]
       })),
       
       // Heritage Sites
-      ...JharkhandHeritageSites.features.slice(0, 6).map((site: any, index) => ({
+      ...JharkhandHeritageSites.features.slice(0, 6).map((site, index) => ({
         id: `heritage-${index}`,
         name: site.properties?.name,
         description: site.properties?.description,
@@ -88,11 +88,11 @@ export default function ExplorePage() {
         visitors: Math.floor(Math.random() * 30000) + 2000,
         isWishlisted: false,
         isVisited: false,
-        coordinates: site.geometry.coordinates
+        coordinates: site.geometry.coordinates as [number, number]
       })),
       
       // Wildlife & Adventure
-      ...JharkhandWildlifeAdventure.features.slice(0, 8).map((place: any, index) => ({
+      ...JharkhandWildlifeAdventure.features.slice(0, 8).map((place, index) => ({
         id: `wildlife-${index}`,
         name: place.properties?.name,
         description: place.properties?.description,
@@ -104,7 +104,7 @@ export default function ExplorePage() {
         visitors: Math.floor(Math.random() * 25000) + 3000,
         isWishlisted: false,
         isVisited: false,
-        coordinates: place.geometry.coordinates
+        coordinates: place.geometry.coordinates as [number, number]
       }))
     ];
     

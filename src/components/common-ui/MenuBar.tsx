@@ -40,7 +40,7 @@ export default function MenuBar() {
   const storeUser = useAppStore((s) => s.user);
   const role = useAppStore((s) => s.role);
   const logout = useAppStore((s) => s.logout);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ name?: string; role?: string | null } | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   useEffect(() => {
