@@ -5,7 +5,7 @@ import { useAppStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shield, MapPin, Users, AlertTriangle } from "lucide-react";
+import { Shield, MapPin, AlertTriangle } from "lucide-react";
 
 export default function AdminZonalPage() {
   const router = useRouter();

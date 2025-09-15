@@ -351,9 +351,12 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const updateComplaintStatus = (id: string, status: string) => {
+  const updateComplaintStatus = (
+    id: string,
+    status: Complaint['status']
+  ) => {
     setComplaints(prev => prev.map(complaint => 
-      complaint.id === id ? { ...complaint, status: status as any } : complaint
+      complaint.id === id ? { ...complaint, status } : complaint
     ));
   };
 

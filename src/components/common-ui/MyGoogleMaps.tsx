@@ -258,7 +258,7 @@ export default function MyGoogleMaps() {
           }}
         />
         {/* <Marker position={{ lat: 23.344100, lng: 85.309600 }} /> */}
-        {filters.cities && JharkhandCities.features.map((city: any, idx: number) => {
+        {filters.cities && JharkhandCities.features.map((city, idx: number) => {
           const [lng, lat] = city.geometry.coordinates;
           if (!matchesSearch(city.properties?.name, city.properties?.description)) return null;
           
@@ -387,7 +387,7 @@ export default function MyGoogleMaps() {
          </div>
        </OverlayView>
         )}
-         {filters.temples && JharkhandTemples.features.map((f: any, i: number) => {
+         {filters.temples && JharkhandTemples.features.map((f, i: number) => {
         const [lng, lat] = f.geometry.coordinates;
         if (!matchesSearch(f.properties?.name, f.properties?.description)) return null;
         
@@ -431,7 +431,7 @@ export default function MyGoogleMaps() {
       })}
 
       {/* Heritage Sites Markers */}
-      {filters.heritage && JharkhandHeritageSites.features.map((site: any, i: number) => {
+      {filters.heritage && JharkhandHeritageSites.features.map((site, i: number) => {
         const [lng, lat] = site.geometry.coordinates;
         if (!matchesSearch(site.properties?.name, site.properties?.description)) return null;
         
@@ -475,7 +475,7 @@ export default function MyGoogleMaps() {
       })}
 
       {/* Wildlife & Adventure Markers */}
-      {filters.wildlife && JharkhandWildlifeAdventure.features.map((place: any, i: number) => {
+      {filters.wildlife && JharkhandWildlifeAdventure.features.map((place, i: number) => {
         const [lng, lat] = place.geometry.coordinates;
         if (!matchesSearch(place.properties?.name, place.properties?.description)) return null;
         
